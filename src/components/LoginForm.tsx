@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 
 const LoginInput = ({
@@ -22,7 +23,7 @@ const LoginInput = ({
   );
 };
 
-const LoginForm = () => {
+const LoginForm = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKey: (key: string) => void }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,10 +33,17 @@ const LoginForm = () => {
 
   const isDisabled = isBlank(username) || isBlank(password);
 
-  const onLogin = () => {
-    console.log("Button clicked! " + username + " " + password);
-
+  const onLogin = async () => {
     setPassword("");
+
+    const res = await axios.post(serverAddr + '/auth', {
+      UserName: username,
+      Password: password
+    });
+
+    // If the request is successful, we'll get a security key back
+    const key = await res.data;
+    setSessionKey(key);
   };
 
   return (
