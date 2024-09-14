@@ -2,6 +2,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 import LoginForm from "./components/LoginForm";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [serverAddr, setServerAddr] = useState('127.0.0.1:8080');
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <div className="bg-gray-100 h-screen flex items-center justify-center">
+      <Toaster/>
       <LoginForm serverAddr={serverAddr} setSessionKey={setSessionKey} />
     </div>
   );

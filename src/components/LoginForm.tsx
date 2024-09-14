@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const LoginInput = ({
   placeholder,
@@ -34,16 +35,23 @@ const LoginForm = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessi
   const isDisabled = isBlank(username) || isBlank(password);
 
   const onLogin = async () => {
-    setPassword("");
+    try {
+      setPassword("");
 
-    const res = await axios.post(serverAddr + '/auth', {
-      UserName: username,
-      Password: password
-    });
+      const res = await axios.post(serverAddr + '/auth', {
+        UserName: username,
+        Password: password
+      });
 
-    // If the request is successful, we'll get a security key back
-    const key = await res.data;
-    setSessionKey(key);
+      // If the request is successful, we'll get a security key back
+      const { key, displayname } = await res.data;
+      setSessionKey(key);
+
+      toast.success("Logged into " + displayname + "!");
+    } catch (err) {
+      console.log(err);
+      toast.error("Login Failed!");
+    }
   };
 
   return (
