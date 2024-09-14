@@ -39,8 +39,8 @@ const LoginForm = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessi
       setPassword("");
 
       const res = await axios.post(serverAddr + '/auth', {
-        UserName: username,
-        Password: password
+        username: username,
+        password: password
       });
 
       // If the request is successful, we'll get a security key back
