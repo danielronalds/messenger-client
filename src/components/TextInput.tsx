@@ -1,3 +1,5 @@
+import { isBlank } from "../utils";
+
 const TextInput = ({
   placeholder,
   isPassword,
@@ -12,7 +14,7 @@ const TextInput = ({
   return (
     <input
       type={isPassword ? "password" : "text"}
-      className="block border-grey-200 border-2 rounded p-2"
+      className="block border-gray-200 border-2 rounded p-2"
       placeholder={placeholder}
       value={value}
       onChange={(e) => setValue(e.target.value)}
