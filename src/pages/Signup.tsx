@@ -4,7 +4,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import { isBlank } from "../utils";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = ({ serverAddr }: { serverAddr: string }) => {
   const [username, setUsername] = useState('');
@@ -47,6 +47,8 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
 
           <PrimaryButton desc="Sign Up" onClick={onSignup} isDisabled={isSignupDisabled} />
         </form>
+
+        <Link to="/" className="text-blue-400 text-right">Take me back!</Link>
       </div>
     </div>
   )

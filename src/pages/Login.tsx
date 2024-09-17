@@ -50,7 +50,7 @@ const Login = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKe
           />
           <PrimaryButton desc={"Login"} onClick={onLogin} isDisabled={isLoginDisabled} />
         </form>
-        <Link to={"/signup"} className="text-blue-400 text-right">Don't have an account?</Link>
+        <Link to="/signup" className="text-blue-400 text-right">Don't have an account?</Link>
       </div>
     </div>
   );
