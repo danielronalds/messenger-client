@@ -1,20 +1,26 @@
 import { invoke } from "@tauri-apps/api/tauri";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import LoginForm from "./components/LoginForm";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import Login from "./pages/Login";
 
 function App() {
-  const [serverAddr, setServerAddr] = useState('127.0.0.1:8080');
+  const [serverAddr, setServerAddr] = useState('');
   const [sessionKey, setSessionKey] = useState('');
 
+  // Getting the server address from the local config
   invoke('get_server_address').then((addr) => setServerAddr(addr as string));
 
   return (
-    <div className="bg-gray-100 h-screen flex items-center justify-center">
+  <>
       <Toaster/>
-      <LoginForm serverAddr={serverAddr} setSessionKey={setSessionKey} />
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Login serverAddr={serverAddr} setSessionKey={setSessionKey} />} />
+        </Routes>
+      </BrowserRouter>
+  </>
   );
 }
 
