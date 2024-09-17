@@ -4,6 +4,7 @@ import "./App.css";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   const [serverAddr, setServerAddr] = useState('');
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Login serverAddr={serverAddr} setSessionKey={setSessionKey} />} />
+          <Route path="signup" element={<Signup serverAddr={serverAddr}/>} />
         </Routes>
       </BrowserRouter>
   </>

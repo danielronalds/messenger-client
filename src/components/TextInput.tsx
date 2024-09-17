@@ -1,4 +1,4 @@
-const Input = ({
+const TextInput = ({
   placeholder,
   isPassword,
   value,
@@ -20,4 +20,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default TextInput;
