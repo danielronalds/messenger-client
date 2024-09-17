@@ -45,7 +45,7 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
           <TextInput placeholder={"Password"} isPassword={true} value={password} setValue={setPassword} />
           <TextInput placeholder={"Confirm Password"} isPassword={true} value={confirmPassword} setValue={setConfirmPassword} />
 
-          <PrimaryButton desc="Sign Up" onClick={onSignup} isDisabled={isSignupDisabled} />
+          <PrimaryButton desc="Create Account" onClick={onSignup} isDisabled={isSignupDisabled} />
         </form>
 
         <Link to="/" className="text-blue-400 text-right">Take me back!</Link>
