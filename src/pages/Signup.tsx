@@ -37,7 +37,7 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
   }
 
   return (
-    <div className="bg-gray-100 h-screen flex items-center justify-center">
+    <div className="bg-gradient-to-br from-emerald-400 to-cyan-400 h-screen flex items-center justify-center">
       <div className="bg-white w-[400px] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
         <form action="none" className="flex flex-col gap-6">
           <TextInput placeholder="Username" isPassword={false} value={username} setValue={setUsername} />
