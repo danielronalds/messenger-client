@@ -3,12 +3,14 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import TextInput from "../components/TextInput";
 import { isBlank } from "../utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../components/PrimaryButton";
 
 const Login = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKey: (key: string) => void }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const isLoginDisabled = isBlank(username) || isBlank(password);
 
@@ -26,6 +28,8 @@ const Login = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKe
       setSessionKey(key);
 
       toast.success("Logged into " + displayname + "!");
+
+      navigate('/messaging');
     } catch (err) {
       console.log(err);
       toast.error("Login Failed!");
@@ -33,7 +37,7 @@ const Login = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKe
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex items-center justify-center">
+    <div className="bg-gradient-to-br from-emerald-400 to-cyan-400 h-screen flex items-center justify-center">
       <div className="bg-white w-[400px] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
         <form action="none" className="flex flex-col gap-6">
           <TextInput
