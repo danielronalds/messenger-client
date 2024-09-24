@@ -7,7 +7,13 @@ import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../components/PrimaryButton";
 import GradientBackground from "../components/GradientBackground";
 
-const Login = ({ serverAddr, setUserSession }: { serverAddr: string; setUserSession: (session: UserSession) => void }) => {
+const Login = ({
+  serverAddr,
+  setUserSession,
+}: {
+  serverAddr: string;
+  setUserSession: (session: UserSession) => void;
+}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,9 +25,9 @@ const Login = ({ serverAddr, setUserSession }: { serverAddr: string; setUserSess
     try {
       setPassword("");
 
-      const res = await axios.post(serverAddr + '/auth', {
+      const res = await axios.post(serverAddr + "/auth", {
         username: username,
-        password: password
+        password: password,
       });
 
       // If the request is successful, we'll get a security key back
@@ -30,12 +36,12 @@ const Login = ({ serverAddr, setUserSession }: { serverAddr: string; setUserSess
       setUserSession({
         key,
         username,
-        displayname
-      })
+        displayname,
+      });
 
       toast.success("Logged into " + displayname + "!");
 
-      navigate('/messaging');
+      navigate("/messaging");
     } catch (err) {
       console.log(err);
       toast.error("Login Failed!");
@@ -58,9 +64,15 @@ const Login = ({ serverAddr, setUserSession }: { serverAddr: string; setUserSess
             setValue={setPassword}
             isPassword={true}
           />
-          <PrimaryButton desc={"Login"} onClick={onLogin} isDisabled={isLoginDisabled} />
+          <PrimaryButton
+            desc={"Login"}
+            onClick={onLogin}
+            isDisabled={isLoginDisabled}
+          />
         </form>
-        <Link to="/signup" className="text-blue-400 text-right">Don't have an account?</Link>
+        <Link to="/signup" className="text-blue-400 text-right">
+          Don't have an account?
+        </Link>
       </div>
     </GradientBackground>
   );

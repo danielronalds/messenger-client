@@ -8,23 +8,36 @@ import Signup from "./pages/Signup";
 import Messaging from "./pages/Messaging";
 
 function App() {
-  const [serverAddr, setServerAddr] = useState('');
-  const [userSession, setUserSession] = useState<UserSession>({ key: '', username: ''});
+  const [serverAddr, setServerAddr] = useState("");
+  const [userSession, setUserSession] = useState<UserSession>({
+    key: "",
+    username: "",
+  });
 
   // Getting the server address from the local config
-  invoke('get_server_address').then((addr) => setServerAddr(addr as string));
+  invoke("get_server_address").then((addr) => setServerAddr(addr as string));
 
   return (
-  <>
-      <Toaster/>
+    <>
+      <Toaster />
       <BrowserRouter>
         <Routes>
-          <Route index element={<Login serverAddr={serverAddr} setUserSession={setUserSession} />} />
-          <Route path="signup" element={<Signup serverAddr={serverAddr}/>} />
-          <Route path="messaging" element={<Messaging serverAddr={serverAddr} userSession={userSession}/>} />
+          <Route
+            index
+            element={
+              <Login serverAddr={serverAddr} setUserSession={setUserSession} />
+            }
+          />
+          <Route path="signup" element={<Signup serverAddr={serverAddr} />} />
+          <Route
+            path="messaging"
+            element={
+              <Messaging serverAddr={serverAddr} userSession={userSession} />
+            }
+          />
         </Routes>
       </BrowserRouter>
-  </>
+    </>
   );
 }
 

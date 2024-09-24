@@ -1,4 +1,12 @@
-const PrimaryButton = ({ desc, onClick, isDisabled }: { desc: string; onClick: () => void; isDisabled: boolean; }) => {
+const PrimaryButton = ({
+  desc,
+  onClick,
+  isDisabled,
+}: {
+  desc: string;
+  onClick: () => void;
+  isDisabled: boolean;
+}) => {
   return (
     <button
       type="button"
@@ -9,6 +17,6 @@ const PrimaryButton = ({ desc, onClick, isDisabled }: { desc: string; onClick: (
       {desc}
     </button>
   );
-}
+};
 
 export default PrimaryButton;

@@ -1,10 +1,10 @@
 type UserSession = {
-  key: string
-  username: string
-  displayname: string
-}
+  key: string;
+  username: string;
+  displayname: string;
+};
 
 type User = {
-  username: string,
-  displayname: string,
-}
+  username: string;
+  displayname: string;
+};
