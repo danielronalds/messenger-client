@@ -5,6 +5,7 @@ import { isBlank } from "../utils";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import GradientBackground from "../components/GradientBackground";
 
 const Signup = ({ serverAddr }: { serverAddr: string }) => {
   const [username, setUsername] = useState('');
@@ -37,7 +38,7 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-emerald-400 to-cyan-400 h-screen flex items-center justify-center">
+    <GradientBackground>
       <div className="bg-white w-[400px] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
         <form action="none" className="flex flex-col gap-6">
           <TextInput placeholder="Username" isPassword={false} value={username} setValue={setUsername} />
@@ -50,7 +51,7 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
 
         <Link to="/" className="text-blue-400 text-right">Take me back!</Link>
       </div>
-    </div>
+    </GradientBackground>
   )
 };
 

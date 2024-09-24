@@ -5,8 +5,9 @@ import TextInput from "../components/TextInput";
 import { isBlank } from "../utils";
 import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../components/PrimaryButton";
+import GradientBackground from "../components/GradientBackground";
 
-const Login = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKey: (key: string) => void }) => {
+const Login = ({ serverAddr, setUserSession }: { serverAddr: string; setUserSession: (session: UserSession) => void }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,7 +26,12 @@ const Login = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKe
 
       // If the request is successful, we'll get a security key back
       const { key, displayname } = await res.data;
-      setSessionKey(key);
+
+      setUserSession({
+        key,
+        username,
+        displayname
+      })
 
       toast.success("Logged into " + displayname + "!");
 
@@ -37,7 +43,7 @@ const Login = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKe
   };
 
   return (
-    <div className="bg-gradient-to-br from-emerald-400 to-cyan-400 h-screen flex items-center justify-center">
+    <GradientBackground>
       <div className="bg-white w-[400px] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
         <form action="none" className="flex flex-col gap-6">
           <TextInput
@@ -56,7 +62,7 @@ const Login = ({ serverAddr, setSessionKey }: { serverAddr: string; setSessionKe
         </form>
         <Link to="/signup" className="text-blue-400 text-right">Don't have an account?</Link>
       </div>
-    </div>
+    </GradientBackground>
   );
 };
 
