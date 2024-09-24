@@ -23,6 +23,7 @@ const Messaging = ({
       );
 
       setUsers(filteredUsers);
+      setSelectedUser(filteredUsers[0]);
 
       console.log(users);
     });
@@ -36,7 +37,7 @@ const Messaging = ({
           currentUser={selectedUser}
           setCurrentUser={setSelectedUser}
         />
-        <Chat />
+        <Chat currentUser={selectedUser} />
       </div>
     </GradientBackground>
   );
