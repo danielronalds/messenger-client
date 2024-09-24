@@ -7,6 +7,7 @@ import Chat from "../components/Chat";
 const Messaging = ({serverAddr, userSession}: {serverAddr: string, userSession: UserSession}) => {
   const [users, setUsers] = useState<User[]>([]);
 
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   useEffect(() => {
     axios.get(serverAddr + '/users').then((res) => {
@@ -22,7 +23,7 @@ const Messaging = ({serverAddr, userSession}: {serverAddr: string, userSession: 
   return (
     <GradientBackground>
       <div className="h-[90%] w-[90%] flex flex-row ">
-        <ContactsList users={users} />
+        <ContactsList users={users} currentUser={selectedUser} setCurrentUser={setSelectedUser} />
         <Chat />
       </div>
     </GradientBackground>
