@@ -1,5 +1,3 @@
-import { isBlank } from "../utils";
-
 const TextInput = ({
   placeholder,
   isPassword,

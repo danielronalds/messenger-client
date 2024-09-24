@@ -1,6 +1,8 @@
 import axios from "axios";
 import GradientBackground from "../components/GradientBackground";
 import { useEffect, useState } from "react";
+import ContactsList from "../components/ContactsList";
+import Chat from "../components/Chat";
 
 const Messaging = ({serverAddr, userSession}: {serverAddr: string, userSession: UserSession}) => {
   const [users, setUsers] = useState<User[]>([]);
@@ -19,7 +21,9 @@ const Messaging = ({serverAddr, userSession}: {serverAddr: string, userSession: 
 
   return (
     <GradientBackground>
-      <div className="bg-white h-[90%] w-[90%] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
+      <div className="h-[90%] w-[90%] flex flex-row ">
+        <ContactsList users={users} />
+        <Chat />
       </div>
     </GradientBackground>
   );
