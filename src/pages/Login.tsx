@@ -21,7 +21,13 @@ const Login = ({
 
   const isLoginDisabled = isBlank(username) || isBlank(password);
 
+  const onKeyDown = (event: any) => {
+    if (event.key === 'Enter') onLogin();
+  }
+
   const onLogin = async () => {
+    if (isLoginDisabled) return;
+
     try {
       setPassword("");
 
@@ -51,7 +57,7 @@ const Login = ({
   return (
     <GradientBackground>
       <div className="bg-white w-[400px] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
-        <form action="none" className="flex flex-col gap-6">
+        <form action="none" className="flex flex-col gap-6" onKeyDown={onKeyDown}>
           <TextInput
             placeholder="Username"
             value={username}

@@ -22,7 +22,13 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
     isBlank(confirmPassword) ||
     password !== confirmPassword;
 
+  const onKeyDown = (event: any) => {
+    if (event.key === 'Enter') onSignup();
+  }
+
   const onSignup = () => {
+    if (isSignupDisabled) return;
+
     axios
       .post(serverAddr + "/users", { username, displayname, password })
       .then((res) => {
@@ -42,7 +48,7 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
   return (
     <GradientBackground>
       <div className="bg-white w-[400px] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
-        <form action="none" className="flex flex-col gap-6">
+        <form action="none" className="flex flex-col gap-6" onKeyDown={onKeyDown}>
           <TextInput
             placeholder="Username"
             isPassword={false}
