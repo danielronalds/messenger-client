@@ -64,11 +64,7 @@ const Login = ({
             setValue={setPassword}
             isPassword={true}
           />
-          <PrimaryButton
-            desc={"Login"}
-            onClick={onLogin}
-            isDisabled={isLoginDisabled}
-          />
+          <PrimaryButton onClick={onLogin} isDisabled={isLoginDisabled}>Login</PrimaryButton>
         </form>
         <Link to="/signup" className="text-blue-400 text-right">
           Don't have an account?

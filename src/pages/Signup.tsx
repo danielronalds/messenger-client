@@ -67,17 +67,9 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
             value={confirmPassword}
             setValue={setConfirmPassword}
           />
-
-          <PrimaryButton
-            desc="Create Account"
-            onClick={onSignup}
-            isDisabled={isSignupDisabled}
-          />
+          <PrimaryButton onClick={onSignup} isDisabled={isSignupDisabled}>Create Account</PrimaryButton> 
         </form>
-
-        <Link to="/" className="text-blue-400 text-right">
-          Take me back!
-        </Link>
+        <Link to="/" className="text-blue-400 text-right">Take me back!</Link>
       </div>
     </GradientBackground>
   );
