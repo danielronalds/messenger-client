@@ -19,7 +19,7 @@ export const Contact = ({
       onClick={onClick}
     >
       <div className="flex flex-row gap-2">
-        <FaceIcon />
+        <FaceIcon size={55} />
         <div className="flex flex-col gap-0 justify-center">
           <p>{user.displayname}</p>
           <p className="text-gray-400">{user.username}</p>

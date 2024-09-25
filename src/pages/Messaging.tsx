@@ -3,6 +3,7 @@ import GradientBackground from "../components/GradientBackground";
 import { useEffect, useState } from "react";
 import ContactsList from "../components/ContactsList";
 import Chat from "../components/Chat";
+import AccountDetails from "../components/AccountDetails";
 
 const Messaging = ({
   serverAddr,
@@ -32,11 +33,14 @@ const Messaging = ({
   return (
     <GradientBackground>
       <div className="h-[90%] w-[90%] flex flex-row ">
-        <ContactsList
-          users={users}
-          currentUser={selectedUser}
-          setCurrentUser={setSelectedUser}
-        />
+        <div className="flex gap-4 flex-col pr-4">
+          <AccountDetails userSession={userSession} />
+          <ContactsList
+            users={users}
+            currentUser={selectedUser}
+            setCurrentUser={setSelectedUser}
+          />
+        </div>
         <Chat currentUser={selectedUser} />
       </div>
     </GradientBackground>

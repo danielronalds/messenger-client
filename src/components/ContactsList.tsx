@@ -24,7 +24,7 @@ const ContactsList = ({
   }, [searchTerm, users]);
 
   return (
-    <div className="flex gap-4 flex-col z-10 pr-4">
+    <>
       <ContactSearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {filteredUsers.map((user) => (
         <Contact
@@ -35,7 +35,7 @@ const ContactsList = ({
           }}
         />
       ))}
-    </div>
+    </>
   );
 };
 
