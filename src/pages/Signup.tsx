@@ -23,32 +23,39 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
     password !== confirmPassword;
 
   const onKeyDown = (event: any) => {
-    if (event.key === 'Enter') onSignup();
-  }
+    if (event.key === "Enter") onSignup();
+  };
 
   const onSignup = () => {
     if (isSignupDisabled) return;
+
+    const loadingToastId = toast.loading("Attempting signup...");
 
     axios
       .post(serverAddr + "/users", { username, displayname, password })
       .then((res) => {
         const { username } = res.data;
 
+        toast.dismiss(loadingToastId);
         toast.success("Successfully created new user: " + username);
 
         navigate("/");
       })
       .catch((err) => {
-        const res = err.response;
-
-        toast.error(res.data);
+        console.log(err);
+        toast.dismiss(loadingToastId);
+        toast.error("Failed to create account");
       });
   };
 
   return (
     <GradientBackground>
       <div className="bg-white w-[400px] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
-        <form action="none" className="flex flex-col gap-6" onKeyDown={onKeyDown}>
+        <form
+          action="none"
+          className="flex flex-col gap-6"
+          onKeyDown={onKeyDown}
+        >
           <TextInput
             placeholder="Username"
             isPassword={false}

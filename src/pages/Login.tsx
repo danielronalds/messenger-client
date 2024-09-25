@@ -22,42 +22,49 @@ const Login = ({
   const isLoginDisabled = isBlank(username) || isBlank(password);
 
   const onKeyDown = (event: any) => {
-    if (event.key === 'Enter') onLogin();
-  }
+    if (event.key === "Enter") onLogin();
+  };
 
   const onLogin = async () => {
     if (isLoginDisabled) return;
 
-    try {
-      setPassword("");
+    setPassword("");
 
-      const res = await axios.post(serverAddr + "/auth", {
+    const loadingToastId = toast.loading("Attempting login...");
+
+    axios
+      .post(serverAddr + "/auth", {
         username: username,
         password: password,
+      })
+      .then(async (res) => {
+        const { key, displayname } = await res.data;
+        setUserSession({
+          key,
+          username,
+          displayname,
+        });
+
+        toast.dismiss(loadingToastId);
+        toast.success("Logged into " + displayname);
+
+        navigate("/messaging");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.dismiss(loadingToastId);
+        toast.error("Failed to login to " + username);
       });
-
-      // If the request is successful, we'll get a security key back
-      const { key, displayname } = await res.data;
-
-      setUserSession({
-        key,
-        username,
-        displayname,
-      });
-
-      toast.success("Logged into " + displayname + "!");
-
-      navigate("/messaging");
-    } catch (err) {
-      console.log(err);
-      toast.error("Login Failed!");
-    }
   };
 
   return (
     <GradientBackground>
       <div className="bg-white w-[400px] shadow-2xl rounded-lg p-6 flex flex-col gap-3">
-        <form action="none" className="flex flex-col gap-6" onKeyDown={onKeyDown}>
+        <form
+          action="none"
+          className="flex flex-col gap-6"
+          onKeyDown={onKeyDown}
+        >
           <TextInput
             placeholder="Username"
             value={username}
