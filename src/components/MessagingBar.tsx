@@ -11,14 +11,16 @@ const MessagingBar = ({ currentUser }: { currentUser: User | null }) => {
   // Wiping the message when the current user changes
   useEffect(() => setMessage(""), [currentUser]);
 
-  const handleKeyDown = (event: any) => {if (event.key === 'Enter') sendMessage();}
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") sendMessage();
+  };
 
   const sendMessage = () => {
     if (isBlank(message)) return;
 
     setMessage("");
     toast.success("Sent message!");
-  }
+  };
 
   return (
     <div className="flex flex-row gap-2" onKeyDown={handleKeyDown}>

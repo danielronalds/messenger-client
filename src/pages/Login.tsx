@@ -64,7 +64,9 @@ const Login = ({
             setValue={setPassword}
             isPassword={true}
           />
-          <PrimaryButton onClick={onLogin} isDisabled={isLoginDisabled}>Login</PrimaryButton>
+          <PrimaryButton onClick={onLogin} isDisabled={isLoginDisabled}>
+            Login
+          </PrimaryButton>
         </form>
         <Link to="/signup" className="text-blue-400 text-right">
           Don't have an account?
