@@ -44,6 +44,12 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
       .catch((err) => {
         console.log(err);
         toast.dismiss(loadingToastId);
+
+        if (err.response?.status === 409) {
+          toast.error("Username already exists!");
+          return;
+        }
+
         toast.error("Failed to create account");
       });
   };
