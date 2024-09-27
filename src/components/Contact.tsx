@@ -13,8 +13,8 @@ export const Contact = ({
   return (
     <div
       className={clsx(
-        "w-[350px] bg-white shadow-2xl rounded-lg p-4",
-        isSelected && "border-blue-400 border-4 border-solid",
+        "w-[350px] p-4",
+        isSelected && "bg-gray-200",
       )}
       onClick={onClick}
     >

@@ -32,9 +32,10 @@ const Messaging = ({
 
   return (
     <GradientBackground>
-      <div className="h-[90%] w-[90%] flex flex-row ">
-        <div className="flex gap-4 flex-col pr-4">
+      <div className="h-[90%] w-[90%] flex flex-row bg-white rounded-xl shadow-2xl">
+        <div className="flex gap-2 flex-col bg-gray-100 rounded-l-xl">
           <AccountDetails userSession={userSession} serverAddr={serverAddr} />
+          <hr className="border border-gray-250"/>
           <ContactsList
             users={users}
             currentUser={selectedUser}

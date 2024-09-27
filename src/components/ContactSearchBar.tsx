@@ -11,7 +11,7 @@ const ContactSearchBar = ({
   return (
     <div
       className={
-        "w-[350px] bg-white shadow-2xl rounded-lg p-4 flex flex-row gap-1 items-center"
+        "w-[350px] p-4 flex flex-row gap-1 items-center"
       }
     >
       <SearchIcon />
