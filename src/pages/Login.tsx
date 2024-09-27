@@ -53,7 +53,13 @@ const Login = ({
       .catch((err) => {
         console.log(err);
         toast.dismiss(loadingToastId);
-        toast.error("Failed to login to " + username);
+
+        if (err.response?.status === 401) {
+          toast.error("Incorrect username or password!");
+          return;
+        }
+
+        toast.error("Something went wrong on the server");
       });
   };
 

@@ -50,7 +50,7 @@ const Signup = ({ serverAddr }: { serverAddr: string }) => {
           return;
         }
 
-        toast.error("Failed to create account");
+        toast.error("Something went wrong on the server");
       });
   };
 
