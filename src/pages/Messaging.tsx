@@ -34,7 +34,7 @@ const Messaging = ({
     <GradientBackground>
       <div className="h-[90%] w-[90%] flex flex-row ">
         <div className="flex gap-4 flex-col pr-4">
-          <AccountDetails userSession={userSession} />
+          <AccountDetails userSession={userSession} serverAddr={serverAddr} />
           <ContactsList
             users={users}
             currentUser={selectedUser}

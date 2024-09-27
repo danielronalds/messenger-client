@@ -1,18 +1,25 @@
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AccountIcon from "./icons/AccountIcon";
+import axios from "axios";
 
 export const AccountDetails = ({
+  serverAddr,
   userSession,
 }: {
+  serverAddr: string,
   userSession: UserSession;
 }) => {
   const navigate = useNavigate();
 
   const onSignout = () => {
-    toast.success("Signed out of " + userSession.displayname);
-
-    navigate("/");
+    axios.delete(serverAddr + '/auth', { data: { key: userSession.key }}).then((res) => {
+      toast.success("Signed out of " + userSession.displayname);
+      navigate("/");
+    }).catch(err => {
+      console.log(err);
+      toast.error("Failed to signout");
+    });
   };
 
   return (
