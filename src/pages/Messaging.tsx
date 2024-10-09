@@ -42,7 +42,7 @@ const Messaging = ({
             setCurrentUser={setSelectedUser}
           />
         </div>
-        <Chat currentUser={selectedUser} />
+        <Chat selectedUser={selectedUser} userSession={userSession} serverAddr={serverAddr} />
       </div>
     </GradientBackground>
   );
