@@ -12,6 +12,7 @@ function App() {
   const [userSession, setUserSession] = useState<UserSession>({
     key: "",
     username: "",
+    displayname: "",
   });
 
   // Getting the server address from the local config
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Toaster />
+      <Toaster position="top-right"/>
       <BrowserRouter>
         <Routes>
           <Route

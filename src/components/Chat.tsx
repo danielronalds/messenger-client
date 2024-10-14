@@ -5,8 +5,8 @@ import PrimaryButton from "./PrimaryButton";
 import TextInput from "./TextInput";
 import { isBlank } from "../utils";
 import axios from "axios";
-import toast from "react-hot-toast";
 import MessageBubble from "./MessageBubble";
+import toast from "react-hot-toast";
 
 const Chat = ({
   selectedUser,
@@ -35,6 +35,8 @@ const Chat = ({
       return isFromSelectedUser && !isAlreadyAdded;
     });
 
+    scrollToBottom('MessagesDiv');
+
     setMessages(sortMessages([...messages, ...filteredMessage]));
   }
 
@@ -57,20 +59,39 @@ const Chat = ({
 
   // Setting up pinging for new messages
   useEffect(() => {
-    //Implementing the setInterval method
-    const getNewMessages = setInterval(() => {
+    const getNewMessagesInterval = setInterval(handleNewMessages, 3000);
+
+    return () => clearInterval(getNewMessagesInterval);
+  }, [messages, selectedUser]);
+
+  const handleNewMessages = () => {
       axios
         .post(serverAddr + "/inbox/unread", {
           key: userSession.key,
         })
         .then((res) => {
-          addMessages(res.data)
-        });
-    }, 3000);
+          if (!res.data) return;
 
-    //Clearing the interval
-    return () => clearInterval(getNewMessages);
-  }, [messages]);
+          const newMessages: ChatMessage[] = res.data;
+
+          if (newMessages.length == 0) return;
+
+          // Alerting messages from the not focused user
+          newMessages.filter(m => {
+            const isAlreadyAdded = messages.find((x) => x.id === m.id) !== undefined;
+            const isFromSelectedUser = m.sender === selectedUser?.username;
+
+            return !isAlreadyAdded && !isFromSelectedUser
+          }).forEach(m => toast.success(m.sender + ': ' + m.content));
+
+          addMessages(res.data);
+        });
+  }
+
+  const scrollToBottom = (id: string) => {
+    const element: HTMLElement | null = document.getElementById(id);
+    if (element != null) element.scrollTop = element?.scrollHeight;
+  }
 
   const handleKeyDown = (event: any) => {
     if (event.key === "Enter") sendMessage();
@@ -87,11 +108,9 @@ const Chat = ({
       })
       .then((res) => {
         const sentMessage: ChatMessage = res.data;
-
         setMessages([...messages, sentMessage]);
-        setMessage("");
 
-        toast.success("Sent message!");
+        setMessage("");
       });
   };
 
@@ -101,9 +120,9 @@ const Chat = ({
         <FaceIcon size={35} />
         <h1 className="w-full text-2xl">{selectedUser?.displayname}</h1>
       </div>
-      <div className="w-full h-full flex flex-col gap-1 overflow-y-auto p-3">
+      <div className="w-full h-full flex flex-col gap-1 overflow-y-auto p-3" id='MessagesDiv'>
         {messages.map((message) => {
-          return <MessageBubble message={message.content} isFromMe={message.sender === userSession.username} key={message.id} />
+          return <MessageBubble message={message.content} isFromMe={message.sender === userSession.username} messageId={message.id} />
         })}
       </div>
       <div className="flex flex-row gap-2" onKeyDown={handleKeyDown}>
