@@ -7,13 +7,16 @@ import { isBlank } from "../utils";
 import axios from "axios";
 import MessageBubble from "./MessageBubble";
 import toast from "react-hot-toast";
+import ChatNotification from "./ChatNotification";
 
 const Chat = ({
   selectedUser,
+  selectUser,
   userSession,
   serverAddr,
 }: {
   selectedUser: User | null;
+  selectUser: (u: string) => void;
   userSession: UserSession;
   serverAddr: string;
 }) => {
@@ -82,7 +85,7 @@ const Chat = ({
             const isFromSelectedUser = m.sender === selectedUser?.username;
 
             return !isAlreadyAdded && !isFromSelectedUser
-          }).forEach(m => toast.success(m.sender + ': ' + m.content));
+          }).forEach(m => toast.custom((t) => <ChatNotification t={t} message={m} selectUser={selectUser}/>));
 
           addMessages(res.data);
         });

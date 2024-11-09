@@ -30,6 +30,14 @@ const Messaging = ({
     });
   }, []);
 
+  const selectUser = (username: string) => {
+    const user = users.find((x) => x.username === username);
+
+    if (user) {
+      setSelectedUser(user);
+    }
+  }
+
   return (
     <GradientBackground>
       <div className="h-[90%] w-[90%] flex flex-row bg-white rounded-xl shadow-2xl">
@@ -42,7 +50,7 @@ const Messaging = ({
             setCurrentUser={setSelectedUser}
           />
         </div>
-        <Chat selectedUser={selectedUser} userSession={userSession} serverAddr={serverAddr} />
+        <Chat selectedUser={selectedUser} selectUser={selectUser} userSession={userSession} serverAddr={serverAddr} />
       </div>
     </GradientBackground>
   );
